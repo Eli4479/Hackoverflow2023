@@ -1,7 +1,6 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-// import { Bars3Icon, BellIcon, span } from '@heroicons/react/24/outline'
-// import { Link } from 'react-router-dspan'
+
 
 const navigation = [
   { name: 'Dashboard', href: '/profile', current: true },
@@ -12,10 +11,6 @@ function classNames(...classes) {
 }
 
 export default function Nav() {
-  const logOut = () => {
-    localStorage.removeItem('token')
-    window.location.href = '/home'
-  }
   return (
     <Disclosure as="nav" className="bg-gray-800 z-20">
       {({ open }) => (
@@ -47,7 +42,7 @@ export default function Nav() {
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+                  {/* <div className="flex space-x-4">
                     {navigation.map((item) => (
                       <a
                         key={item.name}
@@ -61,10 +56,19 @@ export default function Nav() {
                         {item.name}
                       </a>
                     ))}
-                  </div>
+                  </div> */}
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              {/* <button class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400">
+                <span class="relative p-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Add Blog
+                </span>
+              </button> */}
+              <a href="/form">
+                <button type="button" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-1 text-center mr-2">Add a post</button>
+              </a>
+
+              {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -85,7 +89,7 @@ export default function Nav() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    {/* <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
                           <a
@@ -96,12 +100,12 @@ export default function Nav() {
                           </a>
                         )}
                       </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
+                    </Menu.Items> */}
+              {/* </Transition> */}
+              {/* </Menu> */}
+              {/* </div> */}
             </div>
-          </div>
+          </div >
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
@@ -122,7 +126,8 @@ export default function Nav() {
             </div>
           </Disclosure.Panel>
         </>
-      )}
-    </Disclosure>
+      )
+      }
+    </Disclosure >
   )
 }
