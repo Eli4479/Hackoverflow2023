@@ -14,6 +14,7 @@ const getPosts = async (req, res) => {
   }
 }
 
+
 const getPost = async (req, res) => {
   const { id } = req.params;
 
@@ -27,8 +28,9 @@ const getPost = async (req, res) => {
 }
 
 const createPost = async (req, res) => {
-  const { title, message, selectedFile, creator, tags } = req.body;
-
+  let { title, message, selectedFile, creator } = req.body;
+  // split tags at commas to make an array
+  let tags = req.body.tags.split(',').map(tag => tag.trim());
   console.log(req.body);
   const newPost = new PostMessage({ title, message, selectedFile, creator, tags })
   console.log(newPost);
