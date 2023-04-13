@@ -11,9 +11,9 @@ To get started you can simply clone this Nostalgia Nook - "Remembering Today, To
 
 Clone the Nostalgia Nook - "Remembering Today, Tomorrow, Always" repository using git:
 
-git clone https://github.com/ISHANT3011/Preserve_Website-Where_your_memories_are_alive.git
+git clone https://github.com/Eli4479/Hackoverflow2023
 
-cd Preserve_Website-Where_your_memories_are_alive
+cd Hackoverflow2023
 Start off with :
 
 cd client
