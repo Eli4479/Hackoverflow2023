@@ -1,6 +1,7 @@
 import React from 'react';
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const navigation = [
@@ -12,6 +13,43 @@ function classNames(...classes) {
 }
 
 const Form = () => {
+  const [title, setTitle] = React.useState('')
+  const [description, setDescription] = React.useState('')
+  const [creator, setCreator] = React.useState('')
+  const [tags, setTags] = React.useState('')
+
+  const add_post = async (e) => {
+    toast.dismiss()
+    toast.loading('Adding post...');
+
+    e.preventDefault()
+    try {
+      let headersList = {
+        "Content-Type": "application/json"
+      }
+
+      let bodyContent = JSON.stringify({
+        "title": { title },
+        "discretion": { description },
+        "creator": { creator },
+        "tags": { tags }
+      });
+
+      let response = await fetch("http://localhost:3030/posts", {
+        method: "POST",
+        body: bodyContent,
+        headers: headersList
+      });
+
+      let data = await response.text();
+      window.location.href = '/'
+
+    }
+    catch (err) {
+      toast.dismiss()
+      toast.error('Internal server error cannot add post');
+    }
+  }
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800 z-20">
@@ -44,68 +82,11 @@ const Form = () => {
                     />
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
-                    {/* <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div> */}
                   </div>
                 </div>
-                {/* <button class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400">
-                <span class="relative p-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                  Add Blog
-                </span>
-              </button> */}
                 <a href="/">
                   <button type="button" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-1 text-center mr-2">Back</button>
                 </a>
-
-                {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://res.cloudinary.com/du3pqgzgf/image/upload/v1680823262/istockphoto-1210939712-612x612_bzyypg.jpg"
-                        alt=""
-                      />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    {/* <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            onClick={logOut}
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Log out
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items> */}
-                {/* </Transition> */}
-                {/* </Menu> */}
-                {/* </div> */}
               </div>
             </div >
 
@@ -143,6 +124,7 @@ const Form = () => {
                 <input
                   type="text"
                   name="name"
+                  onChange={(e) => setTitle(e.target.value)}
                   className="
             w-full
             block px-16 py-2 mt-2
@@ -164,6 +146,7 @@ const Form = () => {
                 <input
                   name="email"
                   type="text"
+                  onChange={(e) => setDescription(e.target.value)}
                   className="
             block
             w-full
@@ -186,6 +169,7 @@ const Form = () => {
                 <span className="text-gray-700">Creator</span>
                 <input
                   name="email"
+                  onChange={(e) => setCreator(e.target.value)}
                   type="text"
                   className="
             block
@@ -209,6 +193,7 @@ const Form = () => {
                 <span className="text-gray-700">Tags</span>
                 <input
                   name="email"
+                  onChange={(e) => setTags(e.target.value)}
                   type="text"
                   className="
             block
@@ -229,7 +214,8 @@ const Form = () => {
             </div>
             <div class="mb-6 mt-3">
               <button
-                type="submit"
+                type="button"
+                onClick={add_post}
                 className="
             h-10
             px-5
@@ -250,6 +236,7 @@ const Form = () => {
           </form>
         </div>
       </div>
+      <Toaster />
     </>
   );
 };

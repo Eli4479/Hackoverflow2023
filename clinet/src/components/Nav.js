@@ -65,7 +65,11 @@ export default function Nav() {
                 </span>
               </button> */}
               <a href="/form">
-                <button type="button" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-1 text-center mr-2">Add a post</button>
+                {/* <button type="button" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-1 text-center mr-2">Add a post</button> */}
+                {/* <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 border border-blue-700 rounded"> */}
+                {/* Add a post */}
+                {/* </button> */}
+                <button type="button" class="focus:outline-none mt-6 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm m-5 p-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
               </a>
 
               {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

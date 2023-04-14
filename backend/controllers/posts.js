@@ -28,12 +28,37 @@ const getPost = async (req, res) => {
 }
 
 const createPost = async (req, res) => {
-  let { title, message, selectedFile, creator } = req.body;
-  // split tags at commas to make an array
-  let tags = req.body.tags.split(',').map(tag => tag.trim());
-  console.log(req.body);
-  const newPost = new PostMessage({ title, message, selectedFile, creator, tags })
-  console.log(newPost);
+  let title = req.body.title;
+  title = title.title;
+  let discretion = req.body.discretion;
+  console.log(discretion);
+  discretion = discretion.description;
+  console.log(discretion);
+  let tags = req.body.tags;
+  tags = tags.tags;
+  let word = "";
+  let tag = [];
+  for (let i = 0; i < tags.length; i++) {
+    if (tags[i] === ",") {
+      tag.push(word);
+      word = "";
+    }
+    else {
+      word = word + tags[i];
+    }
+  }
+  tag.push(word);
+  tags = tag;
+  let creator = req.body.creator;
+  creator = creator.creator;
+  const newPost = new PostMessage(
+    {
+      title: title,
+      message: discretion,
+      creator: creator,
+      tags: tags,
+    }
+  );
   try {
     await newPost.save();
     res.status(201).json(newPost);
