@@ -31,9 +31,7 @@ const createPost = async (req, res) => {
   let title = req.body.title;
   title = title.title;
   let discretion = req.body.discretion;
-  console.log(discretion);
   discretion = discretion.description;
-  console.log(discretion);
   let tags = req.body.tags;
   tags = tags.tags;
   let word = "";
